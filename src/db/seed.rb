@@ -20,53 +20,99 @@ def create_tables
     #     description TEXT
     # )')
 
-    CREATE TABLE "movies" (
-	"id"	INTEGER,
-	"title"	TEXT,
-	"year"	TEXT,
-	"desc"	TEXT,
-	PRIMARY KEY("id" AUTOINCREMENT)
-    );
+        db.execute('CREATE TABLE movies(
+            "id"	INTEGER,
+            "title"	TEXT,
+            "year"	TEXT,
+            "desc"	TEXT,
+            PRIMARY KEY("id" AUTOINCREMENT)
+            )')
 
-    CREATE TABLE "genre" (
-	"id"	INTEGER,
-	"name"	TEXT,
-	PRIMARY KEY("id" AUTOINCREMENT)
-    );
+    # CREATE TABLE "movies" (
+	# "id"	INTEGER,
+	# "title"	TEXT,
+	# "year"	TEXT,
+	# "desc"	TEXT,
+	# PRIMARY KEY("id" AUTOINCREMENT)
+    # );
 
-    CREATE TABLE "movie_genre" (
-	"movie_id"	INTEGER,
-	"genre_id"	INTEGER
-    );
-
-
-    CREATE TABLE "actors" (
+    db.execute('CREATE TABLE genre(
         "id"	INTEGER,
         "name"	TEXT,
         PRIMARY KEY("id" AUTOINCREMENT)
-    );
+        )')
 
-    CREATE TABLE "movie_actor" (
-	"movie_id"	INTEGER,
-	"actor_id"	INTEGER
-    );
+    # CREATE TABLE "genre" (
+	# "id"	INTEGER,
+	# "name"	TEXT,
+	# PRIMARY KEY("id" AUTOINCREMENT)
+    # );
 
-    CREATE TABLE "ratings" (
+    db.execute('CREATE TABLE movie_genre(
+        "movie_id"	INTEGER,
+        "genre_id"	INTEGER
+        )')
+
+    # CREATE TABLE "movie_genre" (
+	# "movie_id"	INTEGER,
+	# "genre_id"	INTEGER
+    # );
+
+    db.execute('CREATE TABLE actors(
+        "id"	INTEGER,
+        "name"	TEXT,
+        PRIMARY KEY("id" AUTOINCREMENT)
+    )')
+
+    # CREATE TABLE "actors" (
+    #     "id"	INTEGER,
+    #     "name"	TEXT,
+    #     PRIMARY KEY("id" AUTOINCREMENT)
+    # );
+
+    db.execute('CREATE TABLE movie_actor(
+        "movie_id"	INTEGER,
+        "actor_id"	INTEGER
+        )')
+
+    # CREATE TABLE "movie_actor" (
+	# "movie_id"	INTEGER,
+	# "actor_id"	INTEGER
+    # );
+
+    db.execute('CREATE TABLE ratings(
         "id"	INTEGER,
         "comment"	TEXT,
         "stars"	INTEGER,
         "movie_id"	TEXT,
         "user_id"	TEXT,
         PRIMARY KEY("id" AUTOINCREMENT)
-    );
+    )')
 
-    CREATE TABLE "users" (
+    # CREATE TABLE "ratings" (
+    #     "id"	INTEGER,
+    #     "comment"	TEXT,
+    #     "stars"	INTEGER,
+    #     "movie_id"	TEXT,
+    #     "user_id"	TEXT,
+    #     PRIMARY KEY("id" AUTOINCREMENT)
+    # );
+
+    db.execute('CREATE TABLE users(
         "id"	INTEGER,
         "name"	TEXT,
         "username"	TEXT NOT NULL UNIQUE,
         "password"	TEXT,
         PRIMARY KEY("id" AUTOINCREMENT)
-    );
+    )')
+
+    # CREATE TABLE "users" (
+    #     "id"	INTEGER,
+    #     "name"	TEXT,
+    #     "username"	TEXT NOT NULL UNIQUE,
+    #     "password"	TEXT,
+    #     PRIMARY KEY("id" AUTOINCREMENT)
+    # );
 
 end
 
