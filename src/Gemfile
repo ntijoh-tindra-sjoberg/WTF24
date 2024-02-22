@@ -7,3 +7,6 @@ gem 'thin'
 gem 'sinatra'
 gem 'rerun'
 gem 'sqlite3'
+gem 'bcrypt'
+
+gem "rack", "~> 2.2.8"
