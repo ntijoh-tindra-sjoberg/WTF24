@@ -55,7 +55,7 @@ class App < Sinatra::Base
         erb :'profil'
     end
 
-    post 'logout' do
+    post '/logout/' do
 
         if user_id = session[:user_id]
             session.destroy
