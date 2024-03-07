@@ -10,6 +10,13 @@ end
 
 def drop_tables
     db.execute('DROP TABLE IF EXISTS movies')
+    db.execute('DROP TABLE IF EXISTS actors')
+    db.execute('DROP TABLE IF EXISTS genre')
+    db.execute('DROP TABLE IF EXISTS movie_actor')
+    db.execute('DROP TABLE IF EXISTS movie_genre')
+    db.execute('DROP TABLE IF EXISTS ratings')
+    db.execute('DROP TABLE IF EXISTS users')
+
 end
 
 def create_tables
