@@ -14,7 +14,6 @@ class App < Sinatra::Base
 
     get '/' do
         @movies = db.execute('SELECT * FROM movies')
-
         erb :index
     end
 
@@ -24,9 +23,13 @@ class App < Sinatra::Base
     end
 
 
-    get '/new' do
+    get '/newuser/' do
         erb :'new'
     end
+
+    # get '/newuser/' do
+
+    # end
 
     post '/newuser/' do
         name = params['name']
@@ -54,7 +57,7 @@ class App < Sinatra::Base
 
         if password_from_db == cleartext_password
             session[:user_id] = user['id']
-            @user = db.execute('SELECT * FROM users WHERE username = ?',username)
+            @user = db.execute('SELECT * FROM users WHERE username = ?',username).first
 
         else
 
@@ -74,6 +77,16 @@ class App < Sinatra::Base
         end
 
     end
+
+    post '/newmovie/' do
+        title = params['title']
+        year = params['year']
+        desc = params['desc']
+      query = 'INSERT INTO movies (title,year,desc) VALUES (?,?,?) RETURNING *'
+      result = db.execute(query,title,year,desc)
+      redirect "/movie/#{result.first['id']}"
+    end
+
 
 
 end
