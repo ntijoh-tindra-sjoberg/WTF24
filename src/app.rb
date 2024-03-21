@@ -8,6 +8,16 @@ class App < Sinatra::Base
         return @db
     end
 
+    helpers do
+
+        def h(text)
+            Rack::Utils.escape_html(text)
+        end
+
+    end
+
+    # sätta h runt varje användar kommentar och använda funktionen
+
     # get '/' do
     #     erb :index
     # end
@@ -19,11 +29,22 @@ class App < Sinatra::Base
 
     get '/movie/:id' do |id|
         @movie = db.execute('SELECT * FROM movies WHERE id = ?', id)[0]
+        @ratings = db.execute('SELECT * FROM ratings WHERE movie_id = ?', id)
         erb :'movie'
     end
 
 
-    get '/newuser/' do
+    # get '/newuser/' do
+    #     erb :'new'
+    # end
+
+
+    # get '/new/' do
+    #     erb :'new'
+    # end
+
+
+    post '/new/' do
         erb :'new'
     end
 

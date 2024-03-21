@@ -1,5 +1,6 @@
 <h2>Välkommen till Film-Babblarna</h2>
 
+
 <ul>
     <% @movies.each do |movie| %>
         <li> <a href="http://localhost:9292/movie/<%=movie['id']%>"><%= movie['title']%></a></li>
