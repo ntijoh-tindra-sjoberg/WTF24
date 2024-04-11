@@ -110,6 +110,7 @@ def create_tables
         "name"	TEXT,
         "username"	TEXT NOT NULL UNIQUE,
         "password"	TEXT,
+        "admin" INTEGER DEFAULT 0,
         PRIMARY KEY("id" AUTOINCREMENT)
     )')
 
@@ -147,6 +148,16 @@ def seed_tables
     movies.each do |movie|
         db.execute('INSERT INTO movies (title, year, desc) VALUES (?,?,?)', movie[:title], movie[:year], movie[:desc])
     end
+
+    users = [
+        {name:'admin', username:'admin', password:BCrypt::Password.create('admin'), admin:'1'},
+    ]
+
+    users.each do |user|
+        db.execute('INSERT INTO users (name, username, password, admin) VALUES (?,?,?,?)', user[:name], user[:username], user[:password], user[:admin])
+    end
+
+
 end
 
 drop_tables

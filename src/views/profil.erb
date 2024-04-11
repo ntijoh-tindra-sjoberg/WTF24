@@ -4,6 +4,12 @@
 <h5><%=@user['username']%></h5>
 
 
+
+<form action='/logout/' method='post'> 
+  <button type='submit'>Logga ut</button>
+</form>
+
+
 <h4>Lägg till en ny film!</h4>
 <form action='/newmovie/' method='post'> 
   <label for="title">Filmens titel:</label>

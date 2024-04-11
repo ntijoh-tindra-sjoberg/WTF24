@@ -6,4 +6,13 @@
 <h3>Beskrivning av filmen: <%=@movie['desc']%></h3>
 
 <h3>Användares kommentarer</h3>
-<h4><%=@ratings[0]%></h4>
+
+<form action='/comment/' method='post'> 
+  <button type='submit'>Kommentera</button>
+</form>
+
+<ul>
+    <% @ratings.each do |rating| %>
+        <li><%= rating['user_id']%>:<%= rating['comment']%>. Betyg:<%= rating['stars']%></li>
+    <% end %>
+</ul>

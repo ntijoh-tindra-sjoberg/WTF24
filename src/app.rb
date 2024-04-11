@@ -1,5 +1,7 @@
 class App < Sinatra::Base
 
+    enable :sessions
+
     def db
         if @db == nil
             @db = SQLite3::Database.new('./db/db.sqlite')
@@ -32,17 +34,6 @@ class App < Sinatra::Base
         @ratings = db.execute('SELECT * FROM ratings WHERE movie_id = ?', id)
         erb :'movie'
     end
-
-
-    # get '/newuser/' do
-    #     erb :'new'
-    # end
-
-
-    # get '/new/' do
-    #     erb :'new'
-    # end
-
 
     post '/new/' do
         erb :'new'
@@ -88,14 +79,32 @@ class App < Sinatra::Base
         erb :'profil'
     end
 
-    post '/logout/' do
+    post '/check/' do
 
-        if user_id = session[:user_id]
-            session.destroy
-            erb :index
-        else
-            erb :'login'
-        end
+        erb :'login'
+
+        # user_id = session[:user_id]
+
+        # if user_id == nil
+        #     erb :'login'
+        # else
+        #     erb :'profil'
+        # end
+
+        # if user_id = session[:user_id]
+        #     session.destroy
+        #     erb :index
+        # else
+        #     erb :'login'
+        # end
+
+    end
+
+    post '/logout/' do
+        user_id = session[:user_id]
+
+        session.destroy
+        erb :index
 
     end
 
@@ -108,6 +117,18 @@ class App < Sinatra::Base
       redirect "/movie/#{result.first['id']}"
     end
 
+
+    post '/comment/' do
+
+        user_id = session[:user_id]
+
+        if user_id == nil
+            erb :'login'
+        else
+            # kunna kommentera
+        end
+
+    end
 
 
 end
