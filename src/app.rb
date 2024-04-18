@@ -35,7 +35,7 @@ class App < Sinatra::Base
         erb :'movie'
     end
 
-    post '/new/' do
+    get '/new' do
         erb :'new'
     end
 
@@ -73,39 +73,19 @@ class App < Sinatra::Base
 
         else
 
-            erb :'login'
+            redirect '/login'
         end
 
-        erb :'profil'
+        redirect '/profil'
     end
 
-    post '/check/' do
-
-        erb :'login'
-
-        # user_id = session[:user_id]
-
-        # if user_id == nil
-        #     erb :'login'
-        # else
-        #     erb :'profil'
-        # end
-
-        # if user_id = session[:user_id]
-        #     session.destroy
-        #     erb :index
-        # else
-        #     erb :'login'
-        # end
-
-    end
 
     post '/logout/' do
         user_id = session[:user_id]
 
         session.destroy
-        erb :index
 
+        redirect '/'
     end
 
     post '/newmovie/' do
@@ -120,15 +100,27 @@ class App < Sinatra::Base
 
     post '/comment/' do
 
-        user_id = session[:user_id]
-
-        if user_id == nil
-            erb :'login'
+        if session[:user_id]
+            redirect '/login'
         else
             # kunna kommentera
         end
 
     end
 
+
+    get '/profil' do
+
+        if !session[:user_id]
+            redirect '/login'
+        end
+
+
+
+        user_id = session[:user_id]
+
+        @user = db.execute('SELECT * FROM users WHERE id = ?',user_id).first
+        erb :profil
+    end
 
 end

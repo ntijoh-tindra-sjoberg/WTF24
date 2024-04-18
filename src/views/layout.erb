@@ -8,10 +8,11 @@
 <body>
     <h1>Film Babblarna</h1>
     <a href="/">Startsida</a>
-    <form action='/check/' method='post'> 
-        <button type='submit'>Logga In</button>
-    </form>
+    <a href="/login">Login</a>
 
+    <% if session[:user_id] %>
+    <a href="/profil">Profil</a>
+    <% end %>
     <%= yield %>
     <span>------</span>
 </body>
