@@ -2,19 +2,19 @@
 
 <h3><%=@movie['title']%></h3>
 <img src="/img/<%=@movie['id']%>.png" alt="Ingen bild har lagts till :( " height="400">
-<h3>Premiär år: <%=@movie['year']%></h3>
-<h3>Beskrivning av filmen: <%=@movie['desc']%></h3>
+<h3>Premiär år:</h3>
+<p><%=@movie['year']%></p>
+<h3>Beskrivning av filmen:</h3>
+<p><%=@movie['desc']%></p>
 
 <h3>Användares kommentarer</h3>
 <% if session[:user_id] %>
 <details>
   <summary>Add comment</summary>
 <form action='/text_comment/' method='post'> 
-  <label for="username">Användarnamn:</label>
-  <input type='text' name='username'></input>
-    <label for="password">Stjärnor av 10:</label>
+  <label for="stars">Stjärnor av 10:</label>
   <input type='text' name='stars'></input>
-  <label for="password">Kommentar:</label>
+  <label for="comment">Kommentar:</label>
   <input type='text' name='comment'></input>
   <button type='submit'>Publicera</button>
 </form>

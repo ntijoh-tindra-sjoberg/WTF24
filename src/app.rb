@@ -109,6 +109,15 @@ class App < Sinatra::Base
     end
 
 
+    post '/text_comment/' do
+        stars = params['stars']
+        comment = params['comment']
+        user_id = session[:user_id]
+      query = 'INSERT INTO ratings (stars,comment,user_id) VALUES (?,?,?) RETURNING *'
+      result = db.execute(query,stars,comment,user_id)
+      redirect "/ratings/#{result.first['id']}"
+    end
+
     get '/profil' do
 
         if !session[:user_id]

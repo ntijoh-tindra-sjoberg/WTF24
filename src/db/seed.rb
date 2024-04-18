@@ -30,7 +30,7 @@ def create_tables
         db.execute('CREATE TABLE movies(
             "id"	INTEGER,
             "title"	TEXT,
-            "year"	TEXT,
+            "year"	INTEGER,
             "desc"	TEXT,
             PRIMARY KEY("id" AUTOINCREMENT)
             )')
@@ -91,8 +91,8 @@ def create_tables
         "id"	INTEGER,
         "comment"	TEXT,
         "stars"	INTEGER,
-        "movie_id"	TEXT,
-        "user_id"	TEXT,
+        "movie_id"	TEXT NOT NULL,
+        "user_id"	TEXT NOT NULL,
         PRIMARY KEY("id" AUTOINCREMENT)
     )')
 

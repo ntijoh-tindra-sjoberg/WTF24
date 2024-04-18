@@ -1,6 +1,21 @@
 <h2>Välkommen till Film-Babblarna</h2>
 
 
+<% if session[:user_id] %>
+<details>
+  <summary>Lägg till en film</summary>
+<form action='/newmovie/' method='post'> 
+  <label for="title">Filmens titel:</label>
+  <input type='text' name='title'></input>
+  <label for="year">Filmens utkomstår:</label>
+  <input type='integer' name='year'></input>
+  <label for="desc">Beskrivning om filmen</label>
+  <input type='text' name='desc'></input>
+  <button type='submit'>Lägg till</button>
+</form>
+</details>
+<% end %>
+
 <ul>
     <% @movies.each do |movie| %>
         <li> <a href="http://localhost:9292/movie/<%=movie['id']%>"><%= movie['title']%></a></li>
