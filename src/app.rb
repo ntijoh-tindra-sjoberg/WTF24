@@ -76,7 +76,7 @@ class App < Sinatra::Base
             redirect '/login'
         end
 
-        redirect '/profil'
+        redirect "/profil/#{user['id']}"
     end
 
 
@@ -132,18 +132,20 @@ class App < Sinatra::Base
 
     end
 
-    get '/profil' do
+
+    get '/profil/:id' do |id|
 
         if !session[:user_id]
             redirect '/login'
         end
-
-
-
         user_id = session[:user_id]
-
         @user = db.execute('SELECT * FROM users WHERE id = ?',user_id).first
         erb :profil
+    end
+
+    get '/alluser' do
+        @users = db.execute('SELECT * FROM users')
+        erb :alluser
     end
 
 end
