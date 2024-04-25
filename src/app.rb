@@ -89,18 +89,25 @@ class App < Sinatra::Base
     end
 
     post '/newmovie/' do
-        title = params['title']
-        year = params['year']
-        desc = params['desc']
-      query = 'INSERT INTO movies (title,year,desc) VALUES (?,?,?) RETURNING *'
-      result = db.execute(query,title,year,desc)
-      redirect "/movie/#{result.first['id']}"
+
+        if !session[:user_id]
+            redirect '/login'
+        else
+            title = params['title']
+            year = params['year']
+            desc = params['desc']
+            query = 'INSERT INTO movies (title,year,desc) VALUES (?,?,?) RETURNING *'
+            result = db.execute(query,title,year,desc)
+            redirect "/movie/#{result.first['id']}"
+        end
+
     end
+
 
 
     post '/comment/' do
 
-        if session[:user_id]
+        if !session[:user_id]
             redirect '/login'
         else
             # kunna kommentera
@@ -110,12 +117,19 @@ class App < Sinatra::Base
 
 
     post '/text_comment/' do
-        stars = params['stars']
-        comment = params['comment']
-        user_id = session[:user_id]
-      query = 'INSERT INTO ratings (stars,comment,user_id) VALUES (?,?,?) RETURNING *'
-      result = db.execute(query,stars,comment,user_id)
-      redirect "/ratings/#{result.first['id']}"
+
+        if !session[:user_id]
+            redirect '/login'
+        else
+            stars = params['stars']
+            comment = params['comment']
+            user_id = session[:user_id]
+          query = 'INSERT INTO ratings (stars,comment,user_id) VALUES (?,?,?) RETURNING *'
+          result = db.execute(query,stars,comment,user_id)
+        #   behöver ta in värdet på vilken film den kommer ifrån, alt kolla det i föregående steg
+        #   redirect "/ratings/#{result.first['id']}"
+        end
+
     end
 
     get '/profil' do
