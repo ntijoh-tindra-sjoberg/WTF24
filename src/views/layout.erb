@@ -15,9 +15,9 @@
     <% end %>
 
     <% if session[:user_id] %>
-
-    <a href="/alluser">Alla användare</a>
-
+        <%# <% if @user['admin'] == 1 %>
+            <a href="/alluser">Alla användare</a>
+        <%# <% end %>
     <% end %>
     
     <%= yield %>

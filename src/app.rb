@@ -144,8 +144,16 @@ class App < Sinatra::Base
     end
 
     get '/alluser' do
+        # if !session[:user_id]
+        #     redirect '/login'
+        # end
+
         @users = db.execute('SELECT * FROM users')
-        erb :alluser
+        redirect 'alluser'
+    end
+
+    post '/delete/:id' do |id|
+        db.execute('DELETE FROM Users WHERE id = ?', id)
     end
 
 end
